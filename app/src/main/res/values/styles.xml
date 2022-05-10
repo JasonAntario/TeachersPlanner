@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="HeaderText">
+        <item name="android:textSize">20sp</item>
+        <item name="font">@font/radio_canada_bold</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="RegularText">
+        <item name="android:textSize">20sp</item>
+        <item name="font">@font/radio_canada_bold</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ChipItem" parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/selector_chip_color</item>
+        <item name="android:textColor">@color/selector_text_color</item>
+    </style>
+
+</resources>

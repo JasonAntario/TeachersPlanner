@@ -3,14 +3,17 @@
 
     <style name="HeaderText">
         <item name="android:textSize">20sp</item>
-        <item name="font">@font/radio_canada_bold</item>
-        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/radio_canada_bold</item>
     </style>
 
     <style name="RegularText">
-        <item name="android:textSize">20sp</item>
-        <item name="font">@font/radio_canada_bold</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/radio_canada_regular</item>
+    </style>
+
+    <style name="SecondText">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/radio_canada_medium</item>
     </style>
 
     <style name="ChipItem" parent="@style/Widget.MaterialComponents.Chip.Choice">

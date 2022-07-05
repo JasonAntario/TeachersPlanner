@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    android:background="@drawable/bg_card"
+    android:elevation="2dp"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/studentNameTV"
+        style="@style/HeaderText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Student name" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/student_address_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Address" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/studentDatesCG"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:chipSpacingHorizontal="8dp">
+
+        <!--        <com.google.android.material.chip.Chip-->
+        <!--            style="@style/ChipItem"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:checked="true"-->
+        <!--            tools:text="Mon, 18:30" />-->
+
+        <!--        <com.google.android.material.chip.Chip-->
+        <!--            style="@style/ChipItem"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            tools:text="Thu, 18:00" />-->
+
+    </com.google.android.material.chip.ChipGroup>
+
+</LinearLayout>

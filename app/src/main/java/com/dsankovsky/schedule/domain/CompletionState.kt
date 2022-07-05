@@ -1,9 +1,10 @@
-package com.dsankovsky.tutorsschedule.domain
+package com.dsankovsky.schedule.domain
 
-sealed class CompletionState{
+enum class CompletionState{
 
-    class Planned: CompletionState()
-    class Completed: CompletionState()
-    class Canceled: CompletionState()
-    class Postpone: CompletionState()
+    PLANNED, COMPLETED, CANCELED, POSTPONE
+//    class Planned: CompletionState()
+//    class Completed: CompletionState()
+//    class Canceled: CompletionState()
+//    class Postpone: CompletionState()
 }

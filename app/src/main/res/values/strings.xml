@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Teacher\'s planner</string>
+    <string name="add_student">Add Student</string>
+    <string name="name_and_surname">Name and Surname</string>
+    <string name="address">Address</string>
+    <string name="payment">Payment</string>
+    <string name="knowledge_level">Knowledge level</string>
+    <string name="add_lesson_date">Add lesson date</string>
 </resources>

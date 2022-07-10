@@ -1,5 +1,6 @@
 package com.dsankovsky.schedule.presentation
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -26,6 +27,7 @@ class StudentsListAdapter :
         holder.studentAddressTv.text = item.address
         holder.studentNameTv.text = item.name
         item.timeTable.let { list ->
+            Log.i("TAG", "onBindViewHolder: ${list.size}")
             if (list.isNotEmpty()) {
                 list.forEach { itemDate ->
                     holder.studentDateCg.apply {

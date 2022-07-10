@@ -11,6 +11,7 @@ data class StudentDbModel(
     val surname: String?,
     val comment: String?,
     val payment: Float,
+    val totalPayment: Float,
     val knowledgeLevel: String,
     val address: String,
     val timeTable: List<String>?

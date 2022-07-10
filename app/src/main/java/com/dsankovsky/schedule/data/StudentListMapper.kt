@@ -11,6 +11,7 @@ class StudentListMapper {
         surname = student.surname,
         comment = student.comment,
         payment = student.payment,
+        totalPayment = student.totalPayment,
         knowledgeLevel = student.knowledgeLevel,
         address = student.address,
         timeTable = student.timeTable
@@ -22,6 +23,7 @@ class StudentListMapper {
         surname = studentDbModel.surname,
         comment = studentDbModel.comment,
         payment = studentDbModel.payment,
+        totalPayment = studentDbModel.totalPayment,
         knowledgeLevel = studentDbModel.knowledgeLevel,
         address = studentDbModel.address,
         timeTable = studentDbModel.timeTable ?: emptyList()

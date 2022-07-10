@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.DialogFragment
@@ -18,7 +19,7 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AddStudentDialog: DialogFragment() {
+class AddStudentDialog : DialogFragment() {
 
     private var _binding: DialogAddStudentBinding? = null
     private val binding get() = _binding!!
@@ -33,58 +34,88 @@ class AddStudentDialog: DialogFragment() {
 
         val dialogBuilder = MaterialAlertDialogBuilder(requireContext())
             .setView(binding.root)
-            .setNegativeButton("Cancel"){ dialog, which ->
+            .setNegativeButton("Cancel") { dialog, which ->
                 dialog.dismiss()
             }
-            .setPositiveButton("Create"){dialog, which ->
-                viewModel.addStudent(binding.addStudentNameValue.text.toString(),
-                    binding.addStudentAddressValue.text.toString(),
-                    binding.addStudentPaymentValue.text.toString().toFloat(),
-                    binding.addStudentKnowledgeLevelValue.text.toString(),
-                    dateTimeList
-                )
+            .setPositiveButton("Create", null)
+
+        val listOfDays = arrayOf("MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN")
+        val listOfHours = mutableListOf<String>()
+        val listOfMinutes = mutableListOf<String>()
+        for (i in 8..23) {
+            if (i < 10) {
+                listOfHours.add("0$i")
+            } else {
+                listOfHours.add(i.toString())
             }
+        }
+        for (i in 0..55 step 5) {
+            if (i < 10) {
+                listOfMinutes.add("0$i")
+            } else {
+                listOfMinutes.add(i.toString())
+            }
+
+        }
+        binding.dayOfWeekPicker.apply {
+            minValue = 0
+            maxValue = listOfDays.size - 1
+            displayedValues = listOfDays
+            wrapSelectorWheel = false
+        }
+        binding.hourPicker.apply {
+            minValue = 0
+            maxValue = listOfHours.size - 1
+            displayedValues = listOfHours.toTypedArray()
+            value = 4
+            wrapSelectorWheel = false
+        }
+        binding.minutesPicker.apply {
+            minValue = 0
+            maxValue = listOfMinutes.size - 1
+            displayedValues = listOfMinutes.toTypedArray()
+            wrapSelectorWheel = false
+        }
 
         binding.addStudentAddLessonButton.setOnClickListener {
-            val datePicker = MaterialDatePicker.Builder.datePicker()
-                .setTitleText("Select day of the week")
-                .setPositiveButtonText("Ok")
-                .setNegativeButtonText("Cancel")
-                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-                .build()
-
-            val timePicker = MaterialTimePicker.Builder()
-                .setTitleText("Select time")
-                .setPositiveButtonText("Ok")
-                .setNegativeButtonText("Cancel")
-                .build()
-
-            timePicker.addOnPositiveButtonClickListener {
-                Log.i(TAG, "onCreateDialog: ${timePicker.hour}:${timePicker.minute}")
-                time = "${timePicker.hour}:${timePicker.minute}"
-                val dayTime = "$dayOfWeek $time"
-                dateTimeList.add(dayTime)
-                val chip = Chip(requireContext()).apply {
-                    text = dayTime
-                }
-                binding.chipGroup.addView(chip)
+            val day = listOfDays[binding.dayOfWeekPicker.value]
+            val hour = listOfHours[binding.hourPicker.value]
+            val minutes = listOfMinutes[binding.minutesPicker.value]
+            val dayTime = "$day, $hour:$minutes"
+            dateTimeList.add(dayTime)
+            val chip = Chip(requireContext()).apply {
+                text = dayTime
             }
-
-            datePicker.addOnPositiveButtonClickListener {
-                val formatter: DateFormat = SimpleDateFormat("E", Locale.US)
-                val day = formatter.format(Date(it))
-                dayOfWeek = day
-                timePicker.show(requireActivity().supportFragmentManager, null)
-            }
-            datePicker.show(requireActivity().supportFragmentManager, null)
+            binding.chipGroup.addView(chip)
         }
 
         return dialogBuilder.create()
     }
 
-    private var dayOfWeek = ""
-    private var time = ""
+    override fun onStart() {
+        super.onStart()
+        val dialog = dialog as AlertDialog
+        dialog.getButton(Dialog.BUTTON_POSITIVE).setOnClickListener {
+            val payment = binding.addStudentPaymentValue.text.toString().toFloatOrNull()
+            if (viewModel.checkStudentName(binding.addStudentNameValue.text.toString())) {
+                viewModel.addStudent(
+                    binding.addStudentNameValue.text.toString(),
+                    binding.addStudentAddressValue.text.toString(),
+                    payment ?: 0f,
+                    binding.addStudentKnowledgeLevelValue.text.toString(),
+                    dateTimeList
+                )
+                dialog.dismiss()
+            } else {
+                binding.addStudentName.error = "Enter name of the student"
+            }
+        }
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     companion object {
         private const val TAG = "AddStudentsDialog"

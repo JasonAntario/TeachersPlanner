@@ -7,13 +7,13 @@ class TypeConverter{
     @androidx.room.TypeConverter
     fun fromStudents(students: MutableList<String>): String? {
         return if (students.isNotEmpty())
-            students.stream().collect(Collectors.joining(","))
+            students.stream().collect(Collectors.joining("@"))
         else
             null
     }
 
     @androidx.room.TypeConverter
     fun toStudents(data: String?): List<String> {
-        return data?.split(",") ?: emptyList()
+        return data?.split("@") ?: emptyList()
     }
 }

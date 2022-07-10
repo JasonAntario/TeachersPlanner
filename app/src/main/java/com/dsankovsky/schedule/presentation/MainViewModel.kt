@@ -26,6 +26,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
             addStudentUseCase.invoke(Student(
                 name = nameSurname,
                 payment = payment,
+                totalPayment = 0f,
                 surname = null,
                 knowledgeLevel = knowledgeLevel,
                 comment = null,
@@ -35,8 +36,13 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
+    fun checkStudentName(name: String): Boolean{
+        return name.isNotBlank()
+    }
+
     private val _errorInputName = MutableLiveData<Boolean>()
     val errorInputName: LiveData<Boolean>
         get() = _errorInputName
+
 
 }
